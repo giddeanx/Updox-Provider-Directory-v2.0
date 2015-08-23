@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html ng-app="providerApp">
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
+    <script type="text/javascript" src="providerdirectory.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+  </head>
+  <body class="container">
+    <h1>Provider Directory</h1>
+    <div ng-controller="ProviderController as providerCtrl">
+      <div class:"floatLeft presentationBox">
+        <h3>Create Provider</h3>
+        <br/>
+        <form ng-submit="addProvider()">
+        <label for="LastName">Last Name</label><br/>
+        <input type="text" id="LastName" ng-model="providerLastName"/>
+        <br/>
+        <label for="FirstName">First Name</label><br/>
+        <input type="text" id="FirstName" ng-model="providerFirstName"/>
+        <br/>
+        <label for="Email">Email Address</label><br/>
+        <input type="text" id="Email" ng-model="providerEmail"/>
+        <br/>
+        <label for="Specialty">Specialty</label><br/>
+        <input type="text" id="Specialty" ng-model="providerSpecialty"/>
+        <br/>
+        <label for="PracticeName">Practice Name</label><br/>
+        <input type="text" id="PracticeName" ng-model="providerPracticeName"/>
+        <br/>
+        <input class="btn-primary" type="submit" value="Submit"/>  
+        </form>      
+      </div>
+      <div class:"floatRight presentationBox">
+        <h3>Provider List</h3>
+        <form ng-submit="removeProvider()">
+        <table class="InfoPanel">
+          <tr ng-repeat="provider in providers">
+            <td class="checkContainer">
+              <input type="checkbox" ng-model="provider.remove">
+            </td>
+            <td>
+              <h2>{{provider.last_name}}, {{provider.first_name}}</h2>
+              {{provider.email_address}}
+            </td>
+            <td>
+              <h4>{{provider.specialty}}</h4>
+              {{provider.practice_name}}
+            </td>
+          </tr>
+        </table>
+        <input class="btn-primary" type="submit" value="Remove"/>
+        </form>
+      </div>
+      <br class="clearfix"/>   
+    </div>
+  </body>
+</html>
