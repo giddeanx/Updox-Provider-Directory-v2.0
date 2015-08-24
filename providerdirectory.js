@@ -19,6 +19,11 @@ angular.module("providerApp", [])
             specialty: providerControl.providerSpecialty,
             practice_name: providerControl.providerPracticeName
         });
+        providerControl.providerLastName =
+        providerControl.providerFirstName =
+        providerControl.providerEmail =
+        providerControl.providerSpecialty =
+        providerControl.providerPracticeName = "";
     };
     providerControl.removeProvider = function () {
         var original = providerControl.providers;
