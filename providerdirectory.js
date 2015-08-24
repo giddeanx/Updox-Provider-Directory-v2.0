@@ -1,6 +1,8 @@
 angular.module("providerApp", [])
-.controller("ProviderController", function ($scope) {
+.controller("ProviderController", ['$scope', '$filter', function ($scope, $filter) {
     var providerControl = $scope;
+    providerControl.reverse = false;
+    providerControl.currentPredicate = "";
     providerControl.providers = [
         { last_name: "Harris", first_name: "Mike", email_address: "mharris@updox.com", specialty: "Pediatrics", practice_name: "Harris Pediatrics" },
         { last_name: "Wijoyo", first_name: "Bimo", email_address: "bwijoyo@updox.com", specialty: "Podiatry", practice_name: "Wijoyo Podiatry" },
@@ -26,5 +28,17 @@ angular.module("providerApp", [])
                 providerControl.providers.push(provider);
         });
     };
-});
+    providerControl.sortProviders = function () {
+        var orderBy = $filter('orderBy');
+        if(providerControl.selectedSortItem == providerControl.currentPredicate){
+            providerControl.reverse = !providerControl.reverse;            
+        } else {
+            providerControl.currentPredicate = providerControl.selectedSortItem;
+            providerControl.reverse = false;
+        }
+        providerControl.providers = orderBy(providerControl.providers, providerControl.selectedSortItem, providerControl.reverse);
+        providerControl.selectedSortItem = "";
+    
+    }
+}]);
 

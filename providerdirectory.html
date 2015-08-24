@@ -32,6 +32,14 @@
       </div>
       <div class:"floatRight presentationBox">
         <h3>Provider List</h3>
+        <select ng-model="selectedSortItem" ng-change="sortProviders()">
+          <option value="">Sort By</option>
+          <option value="last_name">Last Name</option>
+          <option value="first_name">First Name</option>
+          <option value="email_address">Email Address</option>
+          <option value="specialty">Specialty</option>
+          <option value="practice_name">Practice</option>
+        </select>
         <form ng-submit="removeProvider()">
         <table class="InfoPanel">
           <tr ng-repeat="provider in providers">
