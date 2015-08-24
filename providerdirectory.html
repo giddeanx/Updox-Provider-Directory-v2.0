@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html ng-app="providerApp">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="angular.min.js"></script>
+    <script type="text/javascript" src="providerdirectory.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <style type="text/css">
+        .main {
+          background-color: #e2e2e2;
+        }
+        .presentationBox{
+          border: #d9d9d9 3px solid;
+          background-color: white;
+          display: block;
+          padding: 10px 20px;
+        }
+        .textRight{
+          text-align:right !important;
+        }
+        .boxLeft {
+          float: left;
+          width: 260px;
+        }
+        .boxRight {
+          float: right;
+          width: 570px;
+        }
+        .checkContainer {
+          text-align: center !important;
+          vertical-align: middle !important;
+          background-color: white;
+        }
+        .floatRight{
+          float:right;
+        }       
+        h1, h2, h3, h4, h5  {
+            line-height: 10px;
+        }
+        h2{
+          font-size: 20px;
+        }
+        h4{
+          font-weight: normal;
+        }
+        h6{
+            font-size: 18px;
+            color:#999999;
+            margin-top:0px;
+        }
+        .table-striped tbody > tr:nth-child(2n) > td, .table-striped tbody > tr:nth-child(2n) > th {
+            background-color: #e2e2e2;
+        }
+        .table-striped tbody > tr:nth-child(2n+1) > td, .table-striped tbody > tr:nth-child(2n+1) > th {
+            background-color: transparent;
+        }
+        h3 {
+            font-size: 18px;
+            font-family: serif;
+            font-weight: normal;
+            margin: 0px;
+        }
+
+
+    </style>
+  </head>
+  <body class="container main" role="document">
+    <h1>Provider Directory</h1>
+    <h6>v2.0</h6><br/>
+    <div ng-controller="ProviderController as providerCtrl" role="main">
+      <div class="presentationBox boxLeft">
+        <h3>Create Provider</h3>
+        <br/>
+        <form ng-submit="addProvider()">
+        <label for="LastName">Last Name</label>
+        <input type="text" id="LastName" ng-model="providerLastName"/>
+        <br/>
+        <label for="FirstName">First Name</label>
+        <input type="text" id="FirstName" ng-model="providerFirstName"/>
+        <br/>
+        <label for="Email">Email Address</label>
+        <input type="text" id="Email" ng-model="providerEmail"/>
+        <br/>
+        <label for="Specialty">Specialty</label>
+        <input type="text" id="Specialty" ng-model="providerSpecialty"/>
+        <br/>
+        <label for="PracticeName">Practice Name</label>
+        <input type="text" id="PracticeName" ng-model="providerPracticeName"/>
+        <br/>
+        <input type="submit" class="btn" value="Submit"/>  
+        </form>      
+      </div>
+      <div class="presentationBox boxRight">
+        <h3>Provider List</h3>
+        <select ng-model="selectedSortItem" ng-change="sortProviders()" class="floatRight">
+          <option value="">Sort By</option>
+          <option value="last_name">Last Name</option>
+          <option value="first_name">First Name</option>
+          <option value="email_address">Email Address</option>
+          <option value="specialty">Specialty</option>
+          <option value="practice_name">Practice</option>
+        </select>
+        <form ng-submit="removeProvider()">
+        <table class="table table-striped">
+          <tr ng-repeat="provider in providers">
+            <td class="checkContainer">
+              <input type="checkbox" ng-model="provider.remove">
+            </td>
+            <td>
+              <h2>{{provider.last_name}}, {{provider.first_name}}</h2>
+              {{provider.email_address}}
+            </td>
+            <td class="textRight">
+              <h4>{{provider.specialty}}</h4>
+              {{provider.practice_name}}
+            </td>
+          </tr>
+        </table>
+        <input type="submit" class="btn floatRight" value="Remove"/>
+        </form>
+      </div>
+      <br class="clearfix"/>   
+    </div>
+  </body>
+</html>
